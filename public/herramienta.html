@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Herramienta | Trackers Merger</title>
+    <meta
+      name="description"
+      content="Combina y copia las listas públicas de trackers de ngosang/trackerslist en un solo bloque de texto."
+    />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="/">
+          <span class="brand__mark" aria-hidden="true">TM</span>
+          <span>Trackers Merger</span>
+        </a>
+        <nav class="site-nav" aria-label="Principal">
+          <a class="button button--ghost" href="/">Inicio</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="tool-layout">
+      <div class="container">
+        <header class="tool-header">
+          <div>
+            <h1>Listas unificadas</h1>
+            <p>
+              Se descargan las listas publicadas en
+              <a href="https://github.com/ngosang/trackerslist" target="_blank" rel="noopener noreferrer"
+                >ngosang/trackerslist</a
+              >, se eliminan duplicados y el resultado queda listo para copiar en tu cliente BitTorrent.
+            </p>
+          </div>
+          <button id="refresh-button" class="button button--secondary" type="button">Actualizar listas</button>
+        </header>
+
+        <div class="status-bar" aria-live="polite">
+          <span id="status-pill" class="status-pill">Preparando descarga…</span>
+          <span id="count-pill" class="status-pill">0 trackers únicos</span>
+          <span id="lists-pill" class="status-pill">0 listas procesadas</span>
+        </div>
+
+        <div class="toolbar">
+          <button id="copy-button" class="button button--primary" type="button" disabled>
+            Copiar al portapapeles
+          </button>
+          <button id="select-button" class="button button--ghost" type="button" disabled>Seleccionar todo</button>
+        </div>
+
+        <label class="sr-only" for="trackers-output">Trackers unificados</label>
+        <textarea
+          id="trackers-output"
+          class="trackers-output"
+          readonly
+          spellcheck="false"
+          aria-readonly="true"
+          placeholder="Las listas aparecerán aquí cuando termine la descarga."
+        ></textarea>
+
+        <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        <p id="warnings" class="note" hidden></p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="footer-note">
+          Fuente:
+          <a href="https://github.com/ngosang/trackerslist" target="_blank" rel="noopener noreferrer"
+            >ngosang/trackerslist</a
+          >.
+        </p>
+        <a class="button button--ghost" href="/">Volver al inicio</a>
+      </div>
+    </footer>
+
+    <script src="/js/herramienta.js" defer></script>
+  </body>
+</html>

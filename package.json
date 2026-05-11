@@ -1,0 +1,13 @@
+{
+  "name": "trackers-merger",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agrega las listas públicas de ngosang/trackerslist en un solo archivo para clientes BitTorrent.",
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public"
+  },
+  "devDependencies": {
+    "wrangler": "^4.14.0"
+  }
+}

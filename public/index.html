@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trackers Merger | Unifica listas públicas de BitTorrent</title>
+    <meta
+      name="description"
+      content="Combina las listas públicas de ngosang/trackerslist en un solo archivo listo para copiar en tu cliente BitTorrent."
+    />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="/">
+          <span class="brand__mark" aria-hidden="true">TM</span>
+          <span>Trackers Merger</span>
+        </a>
+        <nav class="site-nav" aria-label="Principal">
+          <a class="button button--ghost" href="/herramienta.html">Abrir herramienta</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__grid">
+          <div>
+            <p class="hero__eyebrow">Listas públicas de BitTorrent</p>
+            <h1>Unifica trackers en un solo bloque para copiar y pegar.</h1>
+            <p class="hero__lead">
+              Esta herramienta recorre las listas publicadas en
+              <a href="https://github.com/ngosang/trackerslist" target="_blank" rel="noopener noreferrer"
+                >ngosang/trackerslist</a
+              >, elimina duplicados y muestra el resultado en un cuadro de solo lectura para que puedas copiarlo al
+              portapapeles y usarlo en qBittorrent, Transmission, Deluge, aria2 u otros clientes compatibles.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="/herramienta.html">Usar la herramienta</a>
+              <a
+                class="button button--secondary"
+                href="https://github.com/ngosang/trackerslist"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Ver repositorio fuente</a
+              >
+            </div>
+          </div>
+
+          <aside class="panel" aria-label="Resumen rápido">
+            <h2>Qué hace</h2>
+            <p>
+              Descarga cada lista disponible en la sección <strong>Lists</strong> del repositorio, las combina en un
+              único archivo de texto y te permite revisarlo y copiarlo sin editarlo manualmente.
+            </p>
+            <p class="note">
+              Los datos se obtienen en tiempo real desde los mirrors del repositorio. Si una lista no responde, el resto
+              sigue procesándose.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section__title">Cómo funciona</h2>
+          <div class="grid grid--3">
+            <article class="feature-card">
+              <h3>1. Descarga las listas</h3>
+              <p>
+                Se consultan las listas como <code>trackers_best</code>, <code>trackers_all</code>,
+                <code>trackers_all_udp</code>, <code>trackers_all_http</code>, <code>trackers_all_https</code> y sus
+                variantes con IP, I2P, Yggdrasil y WebSocket.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>2. Elimina duplicados</h3>
+              <p>
+                Cada tracker aparece una sola vez en el resultado final, conservando el orden en que se encuentra por
+                primera vez al recorrer las listas.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>3. Copia y usa</h3>
+              <p>
+                El resultado se muestra en un textbox de solo lectura. Desde ahí puedes copiar todo el contenido al
+                portapapeles y pegarlo en la configuración de tu cliente torrent.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section__title">Listas incluidas</h2>
+          <div class="grid grid--3">
+            <article class="list-card">
+              <h3>Generales</h3>
+              <p>trackers_best, trackers_all y sus variantes por protocolo.</p>
+            </article>
+            <article class="list-card">
+              <h3>Redes especiales</h3>
+              <p>trackers_all_i2p, trackers_all_yggdrasil y trackers_all_ws cuando estén disponibles.</p>
+            </article>
+            <article class="list-card">
+              <h3>Resolución por IP</h3>
+              <p>trackers_best_ip, trackers_all_ip y trackers_all_yggdrasil_ip para entornos con problemas de DNS.</p>
+            </article>
+          </div>
+          <p class="note">
+            La herramienta no sustituye al mantenimiento del repositorio original. Solo agrega y presenta las listas
+            publicadas por la comunidad para facilitar su uso.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="footer-note">
+          Datos de
+          <a href="https://github.com/ngosang/trackerslist" target="_blank" rel="noopener noreferrer"
+            >ngosang/trackerslist</a
+          >.
+        </p>
+        <a class="button button--primary" href="/herramienta.html">Ir a la herramienta</a>
+      </div>
+    </footer>
+  </body>
+</html>
