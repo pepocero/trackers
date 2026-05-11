@@ -1,6 +1,8 @@
 const output = document.getElementById("trackers-output");
 const statusPill = document.getElementById("status-pill");
 const countPill = document.getElementById("count-pill");
+const rawPill = document.getElementById("raw-pill");
+const duplicatesPill = document.getElementById("duplicates-pill");
 const listsPill = document.getElementById("lists-pill");
 const feedback = document.getElementById("feedback");
 const warnings = document.getElementById("warnings");
@@ -80,6 +82,8 @@ async function loadTrackers() {
     output.value = latestText;
 
     countPill.textContent = `${payload.count} trackers únicos`;
+    rawPill.textContent = `${payload.rawTotal} entradas en listas`;
+    duplicatesPill.textContent = `${payload.duplicatesRemoved} duplicados omitidos`;
     listsPill.textContent = `${payload.listsProcessed} listas procesadas`;
     formatWarnings(payload.listsFailed);
 
@@ -90,13 +94,18 @@ async function loadTrackers() {
     }
 
     setStatus("Listas unificadas", "ok");
-    setFeedback("Puedes revisar el resultado y copiarlo al portapapeles.", "success");
+    setFeedback(
+      `Se descargaron ${payload.rawTotal} entradas repartidas en ${payload.listsProcessed} listas. El resultado conserva ${payload.count} trackers únicos y omite ${payload.duplicatesRemoved} duplicados entre listas.`,
+      "success",
+    );
     setControlsEnabled(true);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Error inesperado al cargar las listas.";
     setStatus("Error al cargar", "error");
     setFeedback(message, "error");
     countPill.textContent = "0 trackers únicos";
+    rawPill.textContent = "0 entradas en listas";
+    duplicatesPill.textContent = "0 duplicados omitidos";
     listsPill.textContent = "0 listas procesadas";
   } finally {
     refreshButton.disabled = false;

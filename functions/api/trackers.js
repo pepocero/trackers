@@ -92,18 +92,28 @@ export async function onRequestGet() {
 
   const successfulLists = [];
   const failedLists = [];
+  const listStats = [];
 
   settled.forEach((result, index) => {
     const fileName = TRACKER_LIST_FILES[index];
 
     if (result.status === "fulfilled") {
       successfulLists.push(result.value);
+      listStats.push({
+        file: fileName,
+        count: result.value.length,
+      });
       return;
     }
 
     failedLists.push({
       file: fileName,
       error: result.reason instanceof Error ? result.reason.message : String(result.reason),
+    });
+    listStats.push({
+      file: fileName,
+      count: 0,
+      failed: true,
     });
   });
 
@@ -117,12 +127,17 @@ export async function onRequestGet() {
     );
   }
 
+  const rawTotal = successfulLists.reduce((sum, trackers) => sum + trackers.length, 0);
   const trackers = mergeTrackers(successfulLists);
   const text = trackers.join("\n");
+  const duplicatesRemoved = rawTotal - trackers.length;
 
   return jsonResponse({
     text,
     count: trackers.length,
+    rawTotal,
+    duplicatesRemoved,
+    listStats,
     listsProcessed: TRACKER_LIST_FILES.length - failedLists.length,
     listsFailed: failedLists,
     source: "https://github.com/ngosang/trackerslist",
