@@ -324,28 +324,8 @@ img {
   line-height: 1.6;
 }
 
-.url-field {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+.panel--qb .button {
   margin-bottom: 0.75rem;
-}
-
-.url-field__input {
-  flex: 1 1 16rem;
-  min-width: 0;
-  padding: 0.75rem 0.9rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: #070b14;
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 0.9rem;
-}
-
-.url-field__input:focus {
-  outline: 2px solid rgba(94, 234, 212, 0.35);
-  outline-offset: 2px;
 }
 
 .trackers-output {

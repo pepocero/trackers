@@ -9,14 +9,22 @@ const warnings = document.getElementById("warnings");
 const copyButton = document.getElementById("copy-button");
 const selectButton = document.getElementById("select-button");
 const refreshButton = document.getElementById("refresh-button");
-const trackersUrlInput = document.getElementById("trackers-url");
 const copyUrlButton = document.getElementById("copy-url-button");
 
-const TRACKERS_LIST_URL = `${window.location.origin}/trackers.txt`;
+function getSiteBaseUrl() {
+  const meta = document.querySelector('meta[name="site-base-url"]');
+  const configured = meta?.content?.trim().replace(/\/$/, "");
+
+  if (configured) {
+    return configured;
+  }
+
+  return window.location.origin;
+}
+
+const TRACKERS_LIST_URL = `${getSiteBaseUrl()}/trackers.txt`;
 
 let latestText = "";
-
-trackersUrlInput.value = TRACKERS_LIST_URL;
 
 function setStatus(message, variant = "default") {
   statusPill.textContent = message;
@@ -158,12 +166,7 @@ async function copyTrackersUrl() {
     if (navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(TRACKERS_LIST_URL);
     } else {
-      trackersUrlInput.focus();
-      trackersUrlInput.select();
-      const copied = document.execCommand("copy");
-      if (!copied) {
-        throw new Error("El navegador no permitió copiar la URL.");
-      }
+      throw new Error("El navegador no permitió copiar la URL.");
     }
 
     setFeedback("URL copiada al portapapeles. Pégala en qBittorrent → Opciones → BitTorrent.", "success");

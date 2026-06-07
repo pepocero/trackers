@@ -8,6 +8,7 @@
       name="description"
       content="Combina y copia las listas públicas de trackers de ngosang/trackerslist en un solo bloque de texto."
     />
+    <meta name="site-base-url" content="https://trackers.carlinitools.com" />
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
@@ -50,16 +51,14 @@
           <h2 id="qb-title">URL para qBittorrent</h2>
           <p>
             En <strong>Herramientas → Opciones → BitTorrent</strong>, activa
-            <em>«Añadir automáticamente rastreadores desde la URL a las nuevas descargas»</em> y pega esta URL. qBittorrent
-            descargará la lista unificada cada vez que añadas un torrent nuevo.
+            <em>«Añadir automáticamente rastreadores desde la URL a las nuevas descargas»</em> y pega la URL pública de
+            esta herramienta. qBittorrent descargará la lista unificada cada vez que añadas un torrent nuevo.
           </p>
-          <div class="url-field">
-            <label class="sr-only" for="trackers-url">URL de la lista unificada</label>
-            <input id="trackers-url" class="url-field__input" type="url" readonly spellcheck="false" />
-            <button id="copy-url-button" class="button button--secondary" type="button">Copiar URL</button>
-          </div>
+          <button id="copy-url-button" class="button button--secondary" type="button">
+            Copiar URL para qBittorrent
+          </button>
           <p class="note">
-            La URL debe terminar en <code>.txt</code> para que qBittorrent la acepte. Solo afecta a descargas nuevas, no a
+            La URL termina en <code>.txt</code> para que qBittorrent la acepte. Solo afecta a descargas nuevas, no a
             torrents ya añadidos.
           </p>
         </section>
