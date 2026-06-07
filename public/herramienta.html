@@ -46,6 +46,24 @@
           <span id="lists-pill" class="status-pill">0 listas procesadas</span>
         </div>
 
+        <section class="panel panel--qb" aria-labelledby="qb-title">
+          <h2 id="qb-title">URL para qBittorrent</h2>
+          <p>
+            En <strong>Herramientas → Opciones → BitTorrent</strong>, activa
+            <em>«Añadir automáticamente rastreadores desde la URL a las nuevas descargas»</em> y pega esta URL. qBittorrent
+            descargará la lista unificada cada vez que añadas un torrent nuevo.
+          </p>
+          <div class="url-field">
+            <label class="sr-only" for="trackers-url">URL de la lista unificada</label>
+            <input id="trackers-url" class="url-field__input" type="url" readonly spellcheck="false" />
+            <button id="copy-url-button" class="button button--secondary" type="button">Copiar URL</button>
+          </div>
+          <p class="note">
+            La URL debe terminar en <code>.txt</code> para que qBittorrent la acepte. Solo afecta a descargas nuevas, no a
+            torrents ya añadidos.
+          </p>
+        </section>
+
         <div class="toolbar">
           <button id="copy-button" class="button button--primary" type="button" disabled>
             Copiar al portapapeles

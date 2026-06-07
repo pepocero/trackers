@@ -9,8 +9,14 @@ const warnings = document.getElementById("warnings");
 const copyButton = document.getElementById("copy-button");
 const selectButton = document.getElementById("select-button");
 const refreshButton = document.getElementById("refresh-button");
+const trackersUrlInput = document.getElementById("trackers-url");
+const copyUrlButton = document.getElementById("copy-url-button");
+
+const TRACKERS_LIST_URL = `${window.location.origin}/trackers.txt`;
 
 let latestText = "";
+
+trackersUrlInput.value = TRACKERS_LIST_URL;
 
 function setStatus(message, variant = "default") {
   statusPill.textContent = message;
@@ -147,8 +153,29 @@ function selectAllTrackers() {
   setFeedback("Contenido seleccionado. También puedes copiarlo con el botón principal.", "success");
 }
 
+async function copyTrackersUrl() {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(TRACKERS_LIST_URL);
+    } else {
+      trackersUrlInput.focus();
+      trackersUrlInput.select();
+      const copied = document.execCommand("copy");
+      if (!copied) {
+        throw new Error("El navegador no permitió copiar la URL.");
+      }
+    }
+
+    setFeedback("URL copiada al portapapeles. Pégala en qBittorrent → Opciones → BitTorrent.", "success");
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "No se pudo copiar la URL.";
+    setFeedback(message, "error");
+  }
+}
+
 copyButton.addEventListener("click", copyTrackers);
 selectButton.addEventListener("click", selectAllTrackers);
 refreshButton.addEventListener("click", loadTrackers);
+copyUrlButton.addEventListener("click", copyTrackersUrl);
 
 loadTrackers();
