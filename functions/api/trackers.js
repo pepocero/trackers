@@ -1,4 +1,5 @@
 import { getMergedTrackers } from "../_lib/trackers.js";
+import { TRACKERS_LIST_URL } from "../_lib/config.js";
 
 function jsonResponse(payload, status = 200) {
   return new Response(JSON.stringify(payload), {
@@ -23,5 +24,8 @@ export async function onRequestGet() {
     );
   }
 
-  return jsonResponse(result);
+  return jsonResponse({
+    ...result,
+    trackersListUrl: TRACKERS_LIST_URL,
+  });
 }

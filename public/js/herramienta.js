@@ -11,20 +11,10 @@ const selectButton = document.getElementById("select-button");
 const refreshButton = document.getElementById("refresh-button");
 const copyUrlButton = document.getElementById("copy-url-button");
 
-function getSiteBaseUrl() {
-  const meta = document.querySelector('meta[name="site-base-url"]');
-  const configured = meta?.content?.trim().replace(/\/$/, "");
-
-  if (configured) {
-    return configured;
-  }
-
-  return window.location.origin;
-}
-
-const TRACKERS_LIST_URL = `${getSiteBaseUrl()}/trackers.txt`;
+const TRACKERS_LIST_URL = "https://trackers.carlinitools.com/trackers.txt";
 
 let latestText = "";
+let trackersListUrl = TRACKERS_LIST_URL;
 
 function setStatus(message, variant = "default") {
   statusPill.textContent = message;
@@ -95,6 +85,10 @@ async function loadTrackers() {
     latestText = payload.text || "";
     output.value = latestText;
 
+    if (payload.trackersListUrl) {
+      trackersListUrl = payload.trackersListUrl;
+    }
+
     countPill.textContent = `${payload.count} trackers únicos`;
     rawPill.textContent = `${payload.rawTotal} entradas en listas`;
     duplicatesPill.textContent = `${payload.duplicatesRemoved} duplicados omitidos`;
@@ -164,12 +158,12 @@ function selectAllTrackers() {
 async function copyTrackersUrl() {
   try {
     if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(TRACKERS_LIST_URL);
+      await navigator.clipboard.writeText(trackersListUrl);
     } else {
       throw new Error("El navegador no permitió copiar la URL.");
     }
 
-    setFeedback("URL copiada al portapapeles. Pégala en qBittorrent → Opciones → BitTorrent.", "success");
+    setFeedback(`URL copiada: ${trackersListUrl}. Pégala en qBittorrent → Opciones → BitTorrent.`, "success");
   } catch (error) {
     const message = error instanceof Error ? error.message : "No se pudo copiar la URL.";
     setFeedback(message, "error");
